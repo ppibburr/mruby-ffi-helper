@@ -3,5 +3,6 @@
     spec.authors = ['ppibburr']
     spec.version = "0.0.0"
     
-    spec.add_dependency('mruby-rubyffi-compat', '>= 0.0.0')     
+    spec.add_dependency('mruby-rubyffi-compat', '>= 0.0.0') 
+    spec.add_dependency('mruby-allocate', '>= 0.0.0')        
   end

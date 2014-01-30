@@ -1,3 +1,11 @@
+unless NilClass.instance_methods.index(:to_ptr)
+  class NilClass
+    def to_ptr
+      FFI::Pointer::NULL
+    end
+  end
+end
+
 module FFI::Helper
   module Typed
     attr_accessor :type, :name, :namespace
@@ -82,6 +90,14 @@ module FFI::Helper
           if is_method
             a = [self.to_ptr].push(*a)
             oa = [self.to_ptr].push(*oa)
+          end
+          
+          while ni=a.index(nil)
+            a[ni] = nil.to_ptr
+          end
+          
+          a = a.map do |q|
+            q.respond_to?(:to_ptr) ? q.to_ptr : q
           end
           
           if invoke
